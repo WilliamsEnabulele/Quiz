@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  BASE_URL: 'http://localhost'
+  BASE_URL: 'https://opentdb.com'
 };

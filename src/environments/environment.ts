@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  BASE_URL: 'http://angular'
+  BASE_URL: 'https://opentdb.com'
 };
 
 /*

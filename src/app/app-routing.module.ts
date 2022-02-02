@@ -12,7 +12,7 @@ const routes: Routes = [ {
   ]
 },
 {
-  path: 'auth',
+  path: 'quiz',
   loadChildren: () => import('./features/quiz/quiz.module').then((m)=>m.QuizModule)
 }
 ];
