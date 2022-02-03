@@ -1,10 +1,55 @@
-<div class="container">
-    <div class="row d-flex justify-content-center align-center">
-        <div class="col-sm-8">
-            <h3>Hello Welcome!</h3>
-            <h2>You will be tested on category</h2>
-            
-
+<div class="container-fluid">
+    <div class="row d-flex justify-content-center align-center mb-5" *ngIf="showForm">
+        <div class="col-sm-5 mb-5">
+            <h2 class="text-center">Hello Welcome!</h2>
+            <p class="text-center">You will be tested on {{category}}</p>
+            <form [formGroup]="welcomeForm" (ngSubmit)="save()">
+                <div class="mb-2">
+                    <div class="row">
+                        <div class="col-12">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" class="form-control " formControlName="name"
+                                placeholder="Enter your name" (blur)="displayError=true"
+                                [ngClass]="{ 'is-invalid': displayError && fc.name.errors}">
+                        </div>
+                        <div class="col-12">
+                            <label for="difficulty" class="form-label">Difficulty</label>
+                            <select class="form-control" formControlName="difficulty"
+                            placeholder="Difficulty" (blur)="displayError=true"
+                            [ngClass]="{'is-invalid': displayError && fc.difficulty.errors}">
+                                <option value="easy">Easy</option>
+                                <option value="medium">Medium</option>
+                                <option value="hard">Hard</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success btn-md mt-3 w-100" [disabled]="welcomeForm.invalid">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status"
+                            aria-hidden="true"></span>
+                    <span class="visually-hidden">Loading...</span>
+                        Submit
+                </button>
+            </form>
         </div>
     </div>
+    <div class="row justify-content-center" *ngIf="showQuestion">
+        <div class="col-10">
+            <app-quiz-questions  [question]="question" *ngIf="question"></app-quiz-questions>
+            <div class="row">
+                <div class="col-sm-12 mt-3 mb-3 d-flex justify-content-end">
+                    <div class="align-self-center">
+                        <!-- <button class="btn btn-primary me-md-2" type="button" (click)="backward()" > <i class="fas fa-arrow-left"></i> Previous</button> -->
+                        <button class="btn btn-dark align-end" type="button" *ngIf="totalQuestions!==counter" (click)="forward()"> Next <i class="fas fa-arrow-right"></i></button>
+                        <button class="btn btn-success" type="button" *ngIf="totalQuestions == counter" (click)="submit()"> Submit</button>
+                      </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-10 d-flex justify-content-end mt-3 mb-5">
+                <span *ngFor="let quiz of questions | keyvalue; let i = index" class="badge bg-secondary p-3 m-1 qnav" (click)="navigate(i)"><a >{{i + 1}}</a></span>
+        </div>
+   
+    </div>
+    
 </div>

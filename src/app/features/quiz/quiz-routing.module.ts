@@ -9,9 +9,11 @@ const routes: Routes = [
     path: '',
     component: QuizLayoutComponent,
     children: [
-      { path: '', redirectTo: 'quiz', pathMatch: 'full' },
-      { path: 'quiz:id', component: QuizPageComponent },
+
+      { path: '', redirectTo: 'quiz/:id', pathMatch: 'full' },
+      { path: 'quiz/:id', component: QuizPageComponent },
       { path: 'result', component: QuizResultComponent}
+      
     ]
   }
 ];

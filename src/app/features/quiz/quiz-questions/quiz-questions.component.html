@@ -1,42 +1,25 @@
 <div class="container">
     <div class="row d-flex justify-content-center">
-        <div class="col-8">
+        <div class="col-12">
             <div class="row">
-                <div class="col-sm-12 col-md-8">
+                <div class="col-sm-12 col-md-12 mb-5 mt-5 p-3 bg-success">
                     <!-- Question here -->
-                    <p>Questions text goes here.</p>
-                </div>
-                <div class="col-sm-12 col-md-8">
-                    <!--  Timer here -->
+                    <h6 class="display-6 text-center text-dark">{{question.question}}</h6>
                 </div>
             </div>
-           
             <div class="row">
                 <div class="col-sm-12">
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">
+                        <li class="list-group-item mb-2" *ngFor="let option of question.incorrect_answers; let i = index;" >
                             <!-- Answers Goes here -->
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="answerRadios" id="answers" value="option1" >
-                                <label class="form-check-label" for="answers">
-                                First Answer
+                                <input class="form-check-input" type="radio" name="answerRadios" id="answers{{i}}" value="{{option}}" >
+                                <label class="form-check-label text-dark" for="answers{{i}}">
+                                {{option}}
                                 </label>
                             </div>
                         </li>
                     </ul>
-
-                </div>
-                <div class="col-sm-12">
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <button class="btn btn-primary me-md-2" type="button"> <i class="fas fa-arrow-left"></i> Previous</button>
-                        <button class="btn btn-primary" type="button"><i class="fas fa-arrow-right"></i> Next</button>
-                      </div>
-                </div>
-            </div>
-            <div class="row d-flex flex justify-content-around">
-                <!-- Secondary Navigation -->
-                <div class="col-12">
-                    <span class="small">1</span>
                 </div>
             </div>
         </div>

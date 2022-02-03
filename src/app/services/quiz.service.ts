@@ -17,15 +17,15 @@ export class QuizService {
   ) { }
 
 
-    getQuestions(category: number, difficulty: number ): Observable<Array<Question>> {
+    getQuestions(category: number, difficulty: string ): Observable<Array<Question>> {
     return this.client
       .get<{results:Array<Question>}>(
-        `${environment.BASE_URL + '?amount=10&category='+ category + '&difficulty='+ difficulty + '&type=multiple'}`
+        `${environment.BASE_URL + '/api.php?amount=10&category='+ category + '&difficulty='+ difficulty + '&type=multiple'}`
       ).pipe(map((questions) => {
         let result = [];
         if(Array.isArray(questions.results)){
           questions.results.forEach(question =>{
-            result.push({...question, id: Guid.create()});
+            result.push({...question, id: Guid.raw()});
             question['incorrect_answers'].push(question['correct_answer']);
             question['incorrect_answers'].sort( () => .5 - Math.random());
           })

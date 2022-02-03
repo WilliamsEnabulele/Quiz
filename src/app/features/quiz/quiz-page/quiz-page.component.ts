@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { captureRejections } from 'events';
+import { Question } from 'src/app/models/quiz-question-model';
 import { QuizService } from 'src/app/services/quiz.service';
 import { StorageService } from 'src/app/services/storage.service';
 
@@ -13,10 +13,17 @@ import { StorageService } from 'src/app/services/storage.service';
 export class QuizPageComponent implements OnInit {
 
   welcomeForm!: FormGroup;
-  difficulty: number;
+  difficulty: string;
   category: number;
-  counter: number;
-
+  counter: number = 0;
+  displayError: boolean = false;
+  loading: boolean = false;
+  questions: Array<Question> = [];
+  question : Question;
+  totalQuestions: number = 0;
+  showQuestion: boolean = false;
+  showForm : boolean = true;
+  isUser: any;
   get fc() { return this.welcomeForm.controls; }
 
   constructor( 
@@ -32,23 +39,40 @@ export class QuizPageComponent implements OnInit {
 
   ngOnInit(): void {
 
+    // Welcome Form Initialized
     this.welcomeForm = this.fb.group({
-      
       name: ['', Validators.required],
-      difficulty: ['', Validators.required]
-
-  })
+      difficulty: ['', Validators.required]})
+      
+    // Check if User already in storage
+      const isUser = this.storage.getData('user');
+      if(isUser) {
+        this.showForm = false;
+        this.showQuestion = true;
+        this.category = this.route.snapshot.params['id'];
+        this.difficulty = isUser.difficulty;
+        this.getQuestions();
+      }
   }
 
+  
   save(){
-    this.difficulty = this.welcomeForm['difficulty'].value;
+    this.welcomeForm.patchValue({category : this.category});
+    this.difficulty = this.welcomeForm.value['difficulty'];
     this.storage.setData(this.welcomeForm.value, 'user');
+    this.getQuestions();
+    this.showQuestion = true;
+    this.showForm = false;
+
   }
 
   getQuestions(){
     this.service.getQuestions(this.category, this.difficulty).subscribe({
       next: questions => {
-
+        this.questions = questions;
+        this.question = questions[this.counter];
+        this.totalQuestions = questions.length-1;
+        console.log(this.totalQuestions)
       },
       error: error => {
 
@@ -57,11 +81,27 @@ export class QuizPageComponent implements OnInit {
   }
 
   forward(){
-    this.counter++;
+    const count = this.questions.length-1;
+    if(this.counter < count) {
+      this.counter++;
+      this.question = this.questions[this.counter];
+      console.log(this.counter);
+    }
+    
   }
   
   backward(){
-    this.counter--;
+    const count = this.questions.length-1;
+    if(this.counter !== 0) {
+      this.counter--;
+      this.question = this.questions[this.counter];
+      console.log(this.counter);
+    }
+   
+  }
+
+  navigate(index){
+    this.question = this.questions[index];
   }
 
 }
