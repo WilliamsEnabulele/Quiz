@@ -6,6 +6,7 @@ import { QuizRoutingModule } from './quiz-routing.module';
 import { QuizPageComponent } from './quiz-page/quiz-page.component';
 import { QuizQuestionsComponent } from './quiz-questions/quiz-questions.component';
 import { QuizResultComponent } from './quiz-result/quiz-result.component';
+import { HttpClientModule } from "@angular/common/http";
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { QuizResultComponent } from './quiz-result/quiz-result.component';
     CommonModule,
     QuizRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ]
 })
 export class QuizModule { }
