@@ -19,7 +19,7 @@ export class QuizService {
 
     getQuestions(category: number, difficulty: string ): Observable<Array<Question>> {
     return this.client
-      .get<{results:Array<Question>}>(
+      .get<{results:Array<any>}>(
         `${environment.BASE_URL + '/api.php?amount=10&category='+ category + '&difficulty='+ difficulty + '&type=multiple'}`
       ).pipe(map((questions) => {
         let result = [];
@@ -35,7 +35,7 @@ export class QuizService {
   }
 
   getCategories(){
-    return this.client.get<{trivia_categories:Array<QuizCategory>}>(`${environment.BASE_URL}/api_category.php`)
+    return this.client.get<{trivia_categories:Array<any>}>(`${environment.BASE_URL}/api_category.php`)
     .pipe(
       map((categories) => {
         let result = [];
