@@ -8,11 +8,19 @@ import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@
 export class QuizQuestionsComponent implements OnInit {
 
   @Input() question ;
+  @Output() selectedOption = new EventEmitter();
+
+  letters = new Array<string>("A", "B", "C", "D", "E", "F");
 
   constructor() { }
 
+  sendSelectedOption(option: string){
+    this.selectedOption.emit(option);
+  }
   ngOnInit(): void {
   }
+
+
 
 
 }

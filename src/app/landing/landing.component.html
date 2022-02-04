@@ -1,30 +1,63 @@
-<div class="container-fluid">
+<div class="container-fluid position-relative">
+    <svg class="position-absolute top-0" width="100%" height="1185" viewBox="0 0 100% 1185" fill="#f6f7fd" xmlns="http://www.w3.org/2000/svg">
+        <g filter="url(#filter0_f_1_3)">
+        <circle cx="610" cy="610" r="410" fill="url(#paint0_linear_1_3)"/>
+        </g>
+        <g filter="url(#filter1_f_1_3)">
+        <circle cx="751" cy="451" r="300" fill="url(#paint1_linear_1_3)"/>
+        </g>
+        <defs>
+        <filter id="filter0_f_1_3" x="0" y="0" width="100%" height="100%" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+        <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+        <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+        <feGaussianBlur stdDeviation="100" result="effect1_foregroundBlur_1_3"/>
+        </filter>
+        <filter id="filter1_f_1_3" x="351" y="51" width="800" height="800" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+        <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+        <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+        <feGaussianBlur stdDeviation="50" result="effect1_foregroundBlur_1_3"/>
+        </filter>
+        <linearGradient id="paint0_linear_1_3" x1="610" y1="200" x2="610" y2="1020" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#FF7BCA"/>
+        <stop offset="1" stop-color="#FFC56F" stop-opacity="0.46"/>
+        </linearGradient>
+        <linearGradient id="paint1_linear_1_3" x1="751" y1="151" x2="751" y2="751" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#F22FB0"/>
+        <stop offset="1" stop-color="#F58A25" stop-opacity="0"/>
+        <stop offset="1" stop-color="#7061A3"/>
+        </linearGradient>
+        </defs>
+    </svg>
+  
+        
     <div class="container">
-        <div class="row d-flex justify-content-center align-center">
-            <div class="col-sm-8">
-                <h2 class="text-center text-white mt-5">Trivial Quiz</h2>
-                <p class="text-center text-white">Select a category to proceed</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-6 col-md-4 mb-3" *ngFor="let item of pageOfItems;let i = index">
-                <a routerLink="">
-                    <div class="card bg-{{background[i]}} text-white">
-                        <img src="https://robohash.org/williams{{i}}.jpg?size=250x250&set=set1" class="card-img" alt="...">
-                        <div class="card-img-overlay text-center">
-                            <h2 class="card-title">{{item.name}}</h2>
-                        </div>
-                    </div>
-                </a>
-            
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-8 d-flex justify-content-center text-center">
-                <div class=" pb-0 pt-3 text-center">
-                    <jw-pagination [items]="items" (changePage)="onChangePage($event)"></jw-pagination>
+            <div class="row d-flex justify-content-center align-center">
+                <div class="col-sm-8">
+                    <h1 class="text-center text-dark mt-5 display-1">Trivial Quiz</h1>
+                    <p class="text-center text-dark">Select a category to proceed</p>
                 </div>
             </div>
-        </div>
+            <div class="row">
+                <div class="col-sm-6 col-md-4 mb-3" *ngFor="let item of pageOfItems;let i = index">
+                    <a [routerLink]="['/quiz/quiz', item.id]">
+                        <div class="card bg-{{background[i]}} text-white">
+                            <img src="https://robohash.org/williams{{i}}.jpg?size=250x250&set=set1" class="card-img" alt="...">
+                            <div class="card-img-overlay text-center">
+                                <h2 class="card-title">{{item.name}}</h2>
+                            </div>
+                        </div>
+                    </a>
+                
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-8 d-flex justify-content-center mx-auto">
+                    <div class=" pb-0 pt-3 text-center">
+                        <jw-pagination [items]="items" (changePage)="onChangePage($event)"></jw-pagination>
+                    </div>
+                </div>
+            </div>
+      
+     
     </div>
 </div>

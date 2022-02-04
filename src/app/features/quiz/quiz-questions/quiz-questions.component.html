@@ -2,9 +2,9 @@
     <div class="row d-flex justify-content-center">
         <div class="col-12">
             <div class="row">
-                <div class="col-sm-12 col-md-12 mb-5 mt-5 p-3 bg-success">
+                <div class="col-sm-12 col-md-12 mb-5 mt-3 p-3 bg-success">
                     <!-- Question here -->
-                    <h6 class="display-6 text-center text-dark">{{question.question}}</h6>
+                    <h6 class="display-6 text-center text-white" [innerHTML]="question.question"></h6>
                 </div>
             </div>
             <div class="row">
@@ -13,10 +13,8 @@
                         <li class="list-group-item mb-2" *ngFor="let option of question.incorrect_answers; let i = index;" >
                             <!-- Answers Goes here -->
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="answerRadios" id="answers{{i}}" value="{{option}}" >
-                                <label class="form-check-label text-dark" for="answers{{i}}">
-                                {{option}}
-                                </label>
+                                <input class="form-check-input" type="radio" name="answerRadios" id="answers{{i}}" value="{{option}}" (click)="sendSelectedOption(option)" >
+                                <label class="form-check-label text-dark" for="answers{{i}}">{{letters[i]}}. <span [innerHTML]="option"></span></label>
                             </div>
                         </li>
                     </ul>
